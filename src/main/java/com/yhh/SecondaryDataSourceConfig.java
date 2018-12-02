@@ -22,12 +22,12 @@ import java.util.Map;
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "secondaryEntityManagerFactory",
         transactionManagerRef = "secondaryTransactionManager",
-        basePackages = "com.yhh.secondary.**.dao"
+        basePackages = "com.yhh.secondary.**.dao"//secondary数据库对应dao所在的package
 )
 public class SecondaryDataSourceConfig {
 
     @Bean(name = "secondaryDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.secondary.hikari")
+    @ConfigurationProperties(prefix = "spring.datasource.secondary.hikari")//secondary数据库配置
     public DataSource secondaryDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
@@ -40,12 +40,12 @@ public class SecondaryDataSourceConfig {
 
     @Bean(name = "secondaryEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-                                                                       @Qualifier("vendorProperties") Map<String, ?> vendorProperties) {
+                                                                       @Qualifier("vendorProperties") Map<String, ?> vendorProperties) {//自己定义的Bean：vendorProperties
         return builder
                 .dataSource(secondaryDataSource())
                 .properties(vendorProperties)
-                .packages("com.yhh.secondary.**.entity")
-                .persistenceUnit("secondary")
+                .packages("com.yhh.secondary.**.entity")//secondary数据库对应entity所在的package
+                .persistenceUnit("secondary")//persistence unit，随便给，须唯一
                 .build();
     }
 

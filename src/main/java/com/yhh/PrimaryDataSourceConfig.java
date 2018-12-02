@@ -23,13 +23,13 @@ import java.util.Map;
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "primaryEntityManagerFactory",
         transactionManagerRef = "primaryTransactionManager",
-        basePackages = {"com.yhh.primary.**.dao"}
+        basePackages = {"com.yhh.primary.**.dao"}//primary数据库对应dao所在的package
 )
 public class PrimaryDataSourceConfig {
 
     @Bean(name = "primaryDataSource")
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.primary.hikari")
+    @ConfigurationProperties(prefix = "spring.datasource.primary.hikari")//primary数据库配置
     public DataSource getDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
@@ -43,12 +43,13 @@ public class PrimaryDataSourceConfig {
     @Primary
     @Bean(name = "primaryEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-                                                                       @Qualifier("vendorProperties") Map<String, ?> vendorProperties) {
+                                                                       @Qualifier("vendorProperties") Map<String, ?> vendorProperties) {//自己定义的Bean：vendorProperties
+
         return builder
                 .dataSource(getDataSource())
                 .properties(vendorProperties)
-                .packages("com.yhh.primary.**.entity")
-                .persistenceUnit("primary")
+                .packages("com.yhh.primary.**.entity")//primary数据库对应entity所在的package
+                .persistenceUnit("primary")//persistence unit，随便给，须唯一
                 .build();
     }
 
