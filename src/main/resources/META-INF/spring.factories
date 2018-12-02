@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.yhh.PrimaryDataSourceConfig,\
+com.yhh.SecondaryDataSourceConfig

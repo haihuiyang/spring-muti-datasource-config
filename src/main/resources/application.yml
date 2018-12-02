@@ -1,0 +1,27 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    primary:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        connection-test-query: SELECT 1 FROM DUAL
+        minimum-idle: 1
+        maximum-pool-size: 5
+        pool-name: bosPoolName
+        max-lifetime: 180000000
+        jdbcUrl: jdbc:mysql://${mysqlHost1:localhost}:3306/test1?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: ${mysqlUsername1:root}
+        password: ${mysqlPassword1:123456}
+    secondary:
+      hikari:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        connection-test-query: SELECT 1 FROM DUAL
+        minimum-idle: 1
+        maximum-pool-size: 5
+        pool-name: bosPoolName
+        max-lifetime: 180000000
+        jdbcUrl: jdbc:mysql://${mysqlHost2:localhost}:3306/test2?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        username: ${mysqlUsername2:root}
+        password: ${mysqlPassword2:123456}
