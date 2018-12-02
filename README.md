@@ -34,7 +34,7 @@
 
 1. MutiDaoIT#muti_dao_IT 集成测试，跑过即可（需要注意的是，跑的时候需要将 `build.gradle` 中 `exclude '**/*IT.java'` 注释掉才行）
 
-2. 启动 SpringBoot 应用，然后调用 `http://localhost:8888/api/muti-data` 会得到以下数据：
+2. 启动 SpringBoot 应用，然后请求 `http://localhost:8888/api/muti-data` 会得到以下数据：
 
     ```json
     [
