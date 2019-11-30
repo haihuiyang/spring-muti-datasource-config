@@ -1,5 +1,7 @@
 ### `SpringBoot`多数据源配置：
 
+### 博客地址：[SpringBoot 多数据源配置](https://blog.csdn.net/haihui_yang/article/details/84720542)
+
 **测试环境：同一台机器的两个不同的 `schema`，建表语句及 mock 数据如下：**
 
     ```mysql
